@@ -46,7 +46,7 @@ class PropertyDataExtractor:
             'price': valor,
             'size': size,
             'bedrooms': rooms,
-            'car_spaces': parking
+            'parking_spaces': parking,
         }
 
 class PropertyScraper:
@@ -111,7 +111,10 @@ class DataHandler:
         self.data = data
 
     def create_dataframe(self):
-        return pd.DataFrame(self.data)
+        df = pd.DataFrame(self.data)
+        df['bathrooms'] = pd.NA  # Adiciona coluna bathrooms com valores nulos
+        df['modo'] = pd.NA  # Adiciona coluna modo com valores nulos
+        return df
 
     def save_to_csv(self, df, filename):
         df.to_csv(filename, index=False, encoding='utf-8-sig')
